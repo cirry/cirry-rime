@@ -1,0 +1,19 @@
+# Rime default settings
+
+# Rime schema: My First Cool Schema
+
+# Rime dictionary: Lingua Latina
+
+sechma:
+  sechma_id: cirry_pinyin
+  name: 希瑞拼音
+  version: "0.0.1"
+  author:
+    - cirry <cirry6@aliyun.com>
+  description: |
+    Rime 简体中文输入方案
+engine:
+  processors:
+    - fluency_editor
+  segmentors:
+    - fallback_segmentor
