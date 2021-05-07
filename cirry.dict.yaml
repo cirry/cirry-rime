@@ -2,8 +2,17 @@
 # 在 ... 標記之後的部份就不會作 YAML 文檔來解讀
 
 ---
-name: cirry_pinyin
-version: "0.0.1"
-sort: by_weight
-use_preset_vocabulary: true
+name: cirry
+version: "1"
+sort: original
 ...
+  大家好	hello
+  再见	bye
+
+  星期一	weekday
+  星期二	weekday
+  星期三	weekday
+  星期四	weekday
+  星期五	weekday
+  星期六	weekday
+  星期天	weekday

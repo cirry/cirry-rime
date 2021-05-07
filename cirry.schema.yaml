@@ -4,8 +4,8 @@
 
 # Rime dictionary: Lingua Latina
 
-sechma:
-  sechma_id: cirry_pinyin
+schema:
+  schema_id: cirry
   name: 希瑞拼音
   version: "0.0.1"
   author:
@@ -14,6 +14,33 @@ sechma:
     Rime 简体中文输入方案
 engine:
   processors:
-    - fluency_editor
+    - key_binder  # 抢在其他 processor 处理之前判定是否使用符号键，比如设定了“，”为分页键，如果写在了punctuator后面就会先上屏，而无法分页
+    - speller # 把字母追加到编码串
+    - punctuator # 功能：处理标点符号
+    - selector # 功能：在有候选词的时候，可以通过上下键进行选择。[selector,navigator]配合使用，实现普通输入功能
+    - navigator # 功能：输入的字符可以通过左右移动插入点
+    - express_editor # 空格确认当前输入、其他字符直接上屏
   segmentors:
-    - fallback_segmentor
+    - abc_segmentor # 标记输入码的类型，根据输入的字符，识别为认识的中文，配合字典表使用
+    - punct_segmentor # 划界，符号与其他字符分割开
+    - fallback_segmentor # 未识别的字符
+  translators:
+    - echo_translator # 无其他结果时，创建一个与编码串一样的候选项
+    - punct_translator  # 转换
+    - table_translator # 码表转换，功能：添加字典表
+
+translator:
+  dictionary: cirry # 设定table_translator 使用的词典表
+
+punctuator: # 设定符号表，使用默认表
+  import_preset: default
+
+key_binder:
+  bindings:
+    - when: paging # 仅当已经向后翻页时
+      accept: comma # 设定为“，”键
+      send: Page_Up # 设置能向前翻页
+
+    - when: has_menu # 当有候选项满足条件时
+      accept: period # 设定为“。”键
+      send: Page_Down # 设置向后翻页
