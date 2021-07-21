@@ -12,8 +12,19 @@ schema:
     - cirry <cirry6@aliyun.com>
   description: |
     Rime 简体中文输入方案
+switches:
+  - name: full_shape
+    reset: 0
+    states: [ 半, 全 ]
+  - name: ascii_mode
+    reset: 0
+    states: [ 中, 英 ]
+  - name: simplification
+    reset: 1
+    states: [漢字, 汉字]
 engine:
   processors:
+    - ascii_composer
     - key_binder  # 抢在其他 processor 处理之前判定是否使用符号键，比如设定了“，”为分页键，如果写在了punctuator后面就会先上屏，而无法分页
     - speller # 把字母追加到编码串
     - punctuator # 功能：处理标点符号
@@ -21,6 +32,7 @@ engine:
     - navigator # 功能：输入的字符可以通过左右移动插入点
     - express_editor # 空格确认当前输入、其他字符直接上屏
   segmentors:
+    - ascii_segmentor
     - abc_segmentor # 标记输入码的类型，根据输入的字符，识别为认识的中文，配合字典表使用
     - punct_segmentor # 划界，符号与其他字符分割开
     - fallback_segmentor # 未识别的字符

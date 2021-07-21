@@ -3,7 +3,7 @@
 
 ---
 name: cirry
-version: "1"
+version: "1.0.0"
 sort: original
 ...
   大家好	hello
@@ -16,3 +16,5 @@ sort: original
   星期五	weekday
   星期六	weekday
   星期天	weekday
+  嘛 ma
+  我 wo
